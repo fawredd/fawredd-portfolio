@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .flipBorder {
+        height:100%;
+        width:100%;
+        position:relative;
+        background:transparent;
+        overflow:hidden;
+        border-radius: 10px;
+    }
+    .flipBorder::before{
+        content: "";
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        height: 200%;
+        width: 200%;
+        background: darkslategray;
+        transition: background 0.5s ease;
+        
+    }
+    .flipBorder:hover::before{
+        content: "";
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        height: 200%;
+        width: 200%;
+
+        background: conic-gradient(rgba(0, 0, 0, 0.3), rgb(172, 255, 47) );
+    }
+    .flipAnimation-3.flipBorder:hover::before {
+        animation: spinFlipBorder 3s linear infinite;
+    }
+    .flipAnimation-4.flipBorder:hover::before {
+        animation: spinFlipBorder 4s linear infinite;
+    }
+    .flipAnimation-5.flipBorder:hover::before {
+        animation: spinFlipBorder 5s linear infinite;
+    }
+    .flipAnimation-6.flipBorder:hover::before {
+        animation: spinFlipBorder 6s linear infinite;
+    }
+    .flipBorder .after{
+        content: "";
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        height: calc(100% - 5px);
+        width: calc(100% - 5px);
+    }
+    @keyframes spinFlipBorder {
+        from {
+            transform:translate(-50%,-50%) rotate(0deg);
+        }
+        to {
+            transform:translate(-50%,-50%) rotate(360deg);
+        }
+    }
+  }
