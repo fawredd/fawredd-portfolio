@@ -1,13 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "@fawredd Marcos Moore portfolio Fullstack developer",
-	description:`"¡Bienvenido a mi portfolio! Soy un desarrollador de backend freelance especializado en JavaScript, Node.js, React.js, Next.js y Express.js.
-	Durante mi trayectoria como programador he adquirido una sólida base técnica y enriquecido mi capacidad para resolver problemas que ayudaron a alcanzar objetivos de una manera efectiva y eficiente.
-	Mi enfoque orientado al detalle y mi habilidad para comunicarme efectivamente me han permitido crecer positivamente junto a las personas que forme equipo.
-	Explora mi portfolio para ver ejemplos de mi trabajo y cómo he utilizado mis habilidades en JavaScript, Node.js y otras tecnologías para crear soluciones personalizadas.
-	Si estás buscando un desarrollador de backend altamente competente y versátil para tu próximo proyecto, estaré encantado de colaborar contigo.
-	Palabras clave: JavaScript, Node.js, React.js, Next.js, Express.js, desarrollo backend, freelance, soluciones personalizadas, calidad del código, rendimiento del código.`,
+	name: "@fawredd Marcos Moore (BBA)(Developer) portfolio",
+	description:``,
 	navItems: [
 		/* {
 			label: "Home",
