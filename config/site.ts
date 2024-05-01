@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
 	name: "@fawredd Marcos Moore (BBA)(Developer) portfolio",
-	description:``,
+	description:`Full Stack Web Developer & Business Administrator. Highly motivated Full Stack Web Developer with extensive experience in international trade comex and business administration. Skilled in JavaScript, React, Next.js, Node.js and more. Passionate about building effective web solutions and contributing to company growth.`,
 	navItems: [
 		/* {
 			label: "Home",
