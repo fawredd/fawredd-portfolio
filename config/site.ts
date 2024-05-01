@@ -21,7 +21,7 @@ export const siteConfig = {
 		twitter: "https://twitter.com/fawredd",
 	},
 	myHero: {
-		title:`I'm Marcos (@${process.env.USERNAME})`,
+		title:`I'm Marcos`,
 		subtitle:"Full stack developer",
 		address:"Based on Buenos Aires, Argentina."
 	},
@@ -34,7 +34,7 @@ export const siteConfig = {
 		project_languages: [{id:crypto.randomUUID(),language:'Other'}],
 		project_url: "",
 		project_homepage: "https://www.etercell.com",
-		project_topics: ["PHP","WORDPRESS", "UI/UX", "Terapias regenerativas", "Productos autologos"]
+		project_topics: ["PHP","WORDPRESS", "UI/UX", "Terapias regenerativas", "Productos autologos", "Biomedicina"]
 		},
 	]
 };
