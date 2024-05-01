@@ -11,6 +11,7 @@ import { useState } from "react";
 import { sendQuestion } from "./actions";
 import { FormEvent } from 'react'
 import clsx from 'clsx';
+import { SiteConfig, siteConfig } from '@/config/site';
 
 interface Message {
   id: string;
@@ -20,12 +21,7 @@ interface Message {
 
 export default function ChatPage({ className }:{className: string}) {
   const [loading, setLoading] = useState(0)
-  const [messages, setMessages] = useState<Message[]>(
-    [
-      {id:"0A",text:"Hello",owner:"bot"},
-      {id:"1A",text:"Ask me what you want to know about me.",owner:"bot"},
-    ]
-  )
+  const [messages, setMessages] = useState<Message[]>(siteConfig.aiBotMessages as Message[])
   async function handleSubmit(event: FormEvent<HTMLFormElement>){
     event.preventDefault()
     setLoading(1)
