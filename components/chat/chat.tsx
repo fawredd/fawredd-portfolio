@@ -60,7 +60,7 @@ export default function ChatPage({ className }:{className: string}) {
           <CardHeader className="relative flex flex-col dark:text-green-500 dark:bg-black/75 light:bg-green-500 light:text-black">
             <div className="text-lg font-bold">Fawredd AI Bot</div>
           </CardHeader>
-          <CardBody className="relative max-h-full overflow-y-scroll">
+          <CardBody className="relative max-h-[300px] overflow-y-auto">
           <div className="w-full p-0 m-0 flex flex-col gap-y-1">
           {
             messages.map((message)=>(

@@ -14,7 +14,14 @@ export interface Project_Interface {
 async function getRepos(): Promise<Project_Interface[]>{
   const userName = process.env.USERNAME;
   const token = process.env.GITHUB_TOKEN;
-  const res = await fetch(`https://api.github.com/users/${userName}/repos`, { next: { revalidate: 43200 } }); //,{cache: 'no-store'}
+  const res = await fetch(`https://api.github.com/users/${userName}/repos`,
+    { 
+      next: { revalidate: 43200 },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`
+      }
+    }); //,{cache: 'no-store'}
   if (res.ok){
     const repoJson =  await res.json();
     let data = repoJson.map((item:any):Project_Interface =>{
