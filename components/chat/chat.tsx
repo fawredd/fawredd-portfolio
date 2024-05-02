@@ -7,7 +7,7 @@ import {Input} from "@nextui-org/input";
 import {Spinner} from "@nextui-org/spinner";
 import {Code} from "@nextui-org/code";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { sendQuestion } from "./actions";
 import { FormEvent } from 'react'
 import clsx from 'clsx';
@@ -20,9 +20,11 @@ interface Message {
 }
 
 export default function ChatPage({ className }:{className: string}) {
+  const cardBody = useRef<HTMLDivElement>(null)
   const [inputData, setInputData] = useState('')
   const [loading, setLoading] = useState(0)
   const [messages, setMessages] = useState<Message[]>([])
+  
   useEffect(() => {
     const savedData = localStorage.getItem('messages')
     if (savedData?.length) {
@@ -33,6 +35,9 @@ export default function ChatPage({ className }:{className: string}) {
   }, []);
   
   useEffect(()=>{
+    if (cardBody.current) {
+      cardBody.current.scrollTop = cardBody.current.scrollHeight;
+    }
     if (messages.length) localStorage.setItem('messages', JSON.stringify(messages));
   },[messages])
 
@@ -72,26 +77,28 @@ export default function ChatPage({ className }:{className: string}) {
           <CardHeader className="relative flex flex-col dark:text-green-500 dark:bg-black/75 light:bg-green-500 light:text-black">
             <div className="text-lg font-bold">AI Bot</div>
           </CardHeader>
-          <CardBody className="relative max-h-[300px] overflow-y-auto">
-          <div className="w-full p-0 m-0 flex flex-col gap-y-1">
-          {
-            messages.map((message)=>(
-                <Code
-                  key={message.id}
-                  size="sm"
-                  className={clsx("text-wrap",{ "self-end bg-green-700": message.owner === 'bot', "self-start": message.owner === 'user' })}
-                >
-                  {message.text}
-                </Code>
-            ))
-          }
+          <CardBody className="relative h-full">
+          <div className="max-h-[300px] overflow-y-auto w-full" ref={cardBody}>
+            <div className="w-full p-0 m-0 flex flex-col gap-y-1">
+            {
+              messages.map((message)=>(
+                  <Code
+                    key={message.id}
+                    size="sm"
+                    className={clsx("text-wrap",{ "self-end bg-green-700": message.owner === 'bot', "self-start": message.owner === 'user' })}
+                  >
+                    {message.text}
+                  </Code>
+              ))
+            }
+            </div>
           </div>
           </CardBody>
           <Divider/>
           <CardFooter className="flex-grow-0 mb-1">
               <form onSubmit={handleSubmit} className="flex flex-row items-center justify-around gap-0 w-full">
                 <Input type="text" label="Question?" size="sm" variant="underlined" name="question" onValueChange={setInputData} value={inputData} />
-                <Button type="submit" size="sm">Send{(loading)?(<Spinner size="sm" color="success" />):(null)}</Button>
+                <Button type="submit" size="sm" isDisabled={(inputData.trim().length < 3 || loading == 1)}>Send{(loading)?(<Spinner size="sm" color="success" />):(null)}</Button>
               </form>
           </CardFooter>
         </Card>
