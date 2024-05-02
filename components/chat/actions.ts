@@ -48,7 +48,7 @@ export async function sendQuestion(question: string){
               ]
           })
       })
-      if (response.ok){
+      if (response.ok && response.status == 200){
         const data = await response.json() as Promise<{candidates:{content:{parts:{text:string}[]}}[]}>
         console.log(JSON.stringify(data)) //Console log received data.
         answer = (await data).candidates[0].content.parts[0].text;
