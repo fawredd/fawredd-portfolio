@@ -52,12 +52,20 @@ export default function ChatPage({ className }:{className: string}) {
     }))
 
     const answer = await sendQuestion(formData.get("question") as string)
-
-    setMessages(messages => messages.concat({
-      id: Math.random().toString(36).slice(2),
-      text: answer,
-      owner: "bot",
-    }))
+    if(answer) {
+      setMessages(messages => messages.concat({
+        id: Math.random().toString(36).slice(2),
+        text: answer,
+        owner: "bot",
+      }))
+    } else {
+      setMessages(messages => messages.concat({
+        id: Math.random().toString(36).slice(2),
+        text: "I'm having trouble fetching data from server right now. Try again in a minute please" ,
+        owner: "bot",
+      }))
+      
+    }
 
     setLoading(0);
     setInputData('')
