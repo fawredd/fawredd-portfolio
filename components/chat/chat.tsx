@@ -7,10 +7,11 @@ import {Input} from "@nextui-org/input";
 import {Spinner} from "@nextui-org/spinner";
 import {Code} from "@nextui-org/code";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sendQuestion } from "./actions";
 import { FormEvent } from 'react'
 import clsx from 'clsx';
+import { SiteConfig, siteConfig } from '@/config/site';
 
 interface Message {
   id: string;
@@ -19,13 +20,22 @@ interface Message {
 }
 
 export default function ChatPage({ className }:{className: string}) {
+  const [inputData, setInputData] = useState('')
   const [loading, setLoading] = useState(0)
-  const [messages, setMessages] = useState<Message[]>(
-    [
-      {id:"0A",text:"Hello",owner:"bot"},
-      {id:"1A",text:"Ask me what you want to know about me.",owner:"bot"},
-    ]
-  )
+  const [messages, setMessages] = useState<Message[]>([])
+  useEffect(() => {
+    const savedData = localStorage.getItem('messages')
+    if (savedData?.length) {
+      setMessages([...messages, ...JSON.parse(savedData)]);
+    } else {
+      setMessages(siteConfig.aiBotMessages as Message[])
+    }
+  }, []);
+  
+  useEffect(()=>{
+    if (messages.length) localStorage.setItem('messages', JSON.stringify(messages));
+  },[messages])
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>){
     event.preventDefault()
     setLoading(1)
@@ -43,12 +53,14 @@ export default function ChatPage({ className }:{className: string}) {
       text: answer,
       owner: "bot",
     }))
+
     setLoading(0);
+    setInputData('')
   }  
   
   return (
     <>
-      <form onSubmit={handleSubmit} className={className}>
+      <div className={className}>
       <div className={`flipBorder flipAnimation-4 max-h-full min-h-full flex-grow max-w-full`}>
         <Card
           key={'ChatCard001'}
@@ -76,13 +88,15 @@ export default function ChatPage({ className }:{className: string}) {
           </div>
           </CardBody>
           <Divider/>
-          <CardFooter className="flex flex-row items-center justify-around gap-0 flex-grow-0 mb-1">
-              <Input type="text" label="Question?" size="sm" variant="underlined" name="question" />
-              <Button type="submit" size="sm">Send{(loading)?(<Spinner size="sm" color="success" />):(null)}</Button>
+          <CardFooter className="flex-grow-0 mb-1">
+              <form onSubmit={handleSubmit} className="flex flex-row items-center justify-around gap-0 w-full">
+                <Input type="text" label="Question?" size="sm" variant="underlined" name="question" onValueChange={setInputData} value={inputData} />
+                <Button type="submit" size="sm">Send{(loading)?(<Spinner size="sm" color="success" />):(null)}</Button>
+              </form>
           </CardFooter>
         </Card>
       </div>
-      </form>
+      </div>
     </>
   )
 }

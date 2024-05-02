@@ -36,5 +36,10 @@ export const siteConfig = {
 		project_homepage: "https://www.etercell.com",
 		project_topics: ["PHP","WORDPRESS", "UI/UX", "Terapias regenerativas", "Productos autologos", "Biomedicina"]
 		},
+	],
+	aiBotMessages: [
+		{id:"0A",text:"Hi there!",owner:"bot"},
+		{id:"1A",text:"I'm Marcos assistant! Curious about his backgroud?",owner:"bot"},
+		{id:"2A",text:"Ask me away!",owner:"bot"},
 	]
 };
