@@ -7,7 +7,7 @@ export const Contact = () => {
     return (
     <div className="flex flex-col items-center gap-3 justify-evenly">
         <h1 className={title()}>Contact</h1>
-        <p>I would be delighted to learn more about your company, job opportunities, or personal projects, and explore how I can contribute to your success.</p>
+        <p>I'd love to connect and explore potential collaborations. I'm open to full-time employment opportunities, freelance projects, or simply chatting about the industry.</p>
         <div className="flex flex-row gap-6 justify-evenly items-center">
             <Link href="https://www.linkedin.com/in/mooremarcos">
                 <Image
